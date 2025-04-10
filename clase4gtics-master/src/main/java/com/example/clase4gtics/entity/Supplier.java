@@ -8,15 +8,15 @@ import jakarta.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "Suppliers")
+@Table(name = "employees")
 public class Supplier {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SupplierID")
-    private int id;
-    @Column(nullable = false)
-    private String companyname;
+    @Column(name = "first_name")
+    private int employee_id;
+    @Column(name ="first_name")
+    private String firstName;
     private String contactname;
     private String address;
     private String city;

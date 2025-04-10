@@ -1,6 +1,5 @@
 package com.example.clase4gtics.controller;
 
-import com.example.clase4gtics.entity.Shipper;
 import com.example.clase4gtics.repository.ShipperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

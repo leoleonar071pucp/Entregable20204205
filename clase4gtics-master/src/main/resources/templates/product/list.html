@@ -21,25 +21,20 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Product Name</th>
-                            <th>Categoría</th>
-                            <th>Proveedor</th>
-                            <th>Precio Unitario</th>
-                            <th>Stock</th>
-                            <th>¿Descontinuado?</th>
-                            <th></th>
-                            <th></th>
+                            <th>Nombre</th>
+                            <th>Apellido </th>
+                            <th>Puesto</th>
+                            <th>Departamento</th>
+                            <th>Ciudad</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="product, info : ${listaProductos}">
+                        <tr th:each="employee, info : ${listaEmployee}">
                             <td th:text="${info.index + 1}"></td>
-                            <td th:text="${product.productname}"></td>
-                            <td th:text="${product.category.categoryname}"></td>
-                            <td th:text="${product.supplier.companyname}"></td>
-                            <td th:text="${product.unitprice}"></td>
-                            <td th:text="${product.unitsinstock}"></td>
-                            <td th:text="${product.discontinued?'si':'no'}"></td>
+                            <td th:text="${employee.firstName}"></td>
+                            <td th:text="${employee.lastName}"></td>
+                            <td th:text="${product.jobId.jobTitle}"></td>
+                            <td th:text="${product.departmentId.locationId.streetAdress}"></td>
                             <td><a class="btn btn-primary"
                                    th:href="@{'/product/edit?id=' + ${product.id}}">Editar</a>
                             </td>
