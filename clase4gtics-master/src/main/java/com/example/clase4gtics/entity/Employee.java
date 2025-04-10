@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 @Table(name = "employees")
-public class Supplier {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,15 +17,14 @@ public class Supplier {
     private int employee_id;
     @Column(name ="first_name")
     private String firstName;
-    private String contactname;
-    private String address;
-    private String city;
-    private String region;
-    private String postalcode;
-    private String country;
-    private String phone;
-    private String fax;
-    private String homepage;
+    @Column(name ="last_name")
+    private String lastName;
+    @Column(name ="email")
+    private String email;
+    @Column(name ="phone_number")
+    private String phoneNumber;
+
+
 
 }
 
