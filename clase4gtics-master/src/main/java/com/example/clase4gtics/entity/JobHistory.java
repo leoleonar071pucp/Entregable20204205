@@ -23,8 +23,7 @@ public class JobHistory {
     private LocalDateTime endDate;
     @Column(name ="job_id", length = 10, nullable = false)
     private String jobId;
-    @Column(name ="department_id")
-    private Integer departmentId;
+
 
 }
 

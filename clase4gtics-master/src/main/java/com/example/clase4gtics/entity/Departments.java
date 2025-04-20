@@ -18,8 +18,9 @@ public class Departments {
     private String departmentName;
     @Column(name ="manager_id")
     private Integer managerId;
-    @Column(name ="location_id")
-    private Integer locationId;
+    @ManyToOne
+    @JoinColumn(name = "location_id", referencedColumnName = "location_id")
+    private Locations location;
 
 
 }
