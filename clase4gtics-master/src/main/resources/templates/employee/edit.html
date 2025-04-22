@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Nuevo Empleado</title>
+</head>
+<body>
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Nuevo Empleado</h1>
+        <form method="post" th:action="@{/employee/guardar}" th:object="${employee}" class="row g-3">
+            <input type="hidden" th:field="*{employeeId}"/>
+
+            <div class="col-md-6">
+                <label for="firstName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="lastName" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}">
+            </div>
+
+
+
+            <div class="col-md-6">
+                <label for="job" class="form-label">Puesto</label>
+                <select class="form-select" id="job" th:field="*{job}">
+                    <option th:each="j : ${listaJobs}" th:value="${j.jobId}" th:text="${j.jobTitle}"></option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="salary" class="form-label">Sueldo</label>
+                <input type="number" step="0.01" class="form-control" id="salary" th:field="*{salary}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="manager" class="form-label">Jefe</label>
+                <select class="form-select" id="manager" th:field="*{manager}">
+                    <option value="" disabled selected>Seleccione un jefe</option>
+                    <option th:each="m : ${listaManagers}" th:value="${m.employeeId}" th:text="${m.firstName + ' ' + m.lastName}"></option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="department" class="form-label">Departamento</label>
+                <select class="form-select" id="department" th:field="*{department}">
+                    <option th:each="d : ${listaDepartamentos}" th:value="${d.departmentId}" th:text="${d.departmentName}"></option>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <a th:href="@{/employee/list}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

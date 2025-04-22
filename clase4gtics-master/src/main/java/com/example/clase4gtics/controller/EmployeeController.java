@@ -3,8 +3,9 @@ import com.example.clase4gtics.entity.Employees;
 import com.example.clase4gtics.entity.Jobs;
 import com.example.clase4gtics.repository.DepartmentsRepository;
 import com.example.clase4gtics.repository.EmployeeRepository;
-import com.example.clase4gtics.repository.JobRepository;
+import com.example.clase4gtics.repository.JobHistoryRepository;
 import com.example.clase4gtics.repository.DepartmentsRepository;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -13,10 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -28,16 +25,16 @@ public class EmployeeController {
 
 
     final EmployeeRepository employeeRepository;
-    final JobRepository jobRepository;
+    final JobHistoryRepository jobHistoryRepository;
     final DepartmentsRepository departmentsRepository;
 
     public EmployeeController(EmployeeRepository employeeRepository,
-                                JobRepository jobRepository,
+                                JobHistoryRepository jobHistoryRepository,
                                 DepartmentsRepository departmentsRepository
 
     ) {
         this.employeeRepository = employeeRepository;
-        this.jobRepository = jobRepository;
+        this.jobHistoryRepository = jobHistoryRepository;
         this.departmentsRepository = departmentsRepository;
     }
 
@@ -55,7 +52,7 @@ public class EmployeeController {
 
     @GetMapping("/nuevo")
     public String NuevoEmployee(Model model) {
-        model.addAttribute("listaJobs", jobRepository.findAll());
+        model.addAttribute("listaJobs", jobHistoryRepository.findAll());
         model.addAttribute("listaManagers",employeeRepository.findAllManagers());
         model.addAttribute("listaDepartamentos",departmentsRepository.findAll());
         return "employee/create";
@@ -68,20 +65,44 @@ public class EmployeeController {
     }
 
     @GetMapping("/editar")
-    public String EditarEmployee(Model model, @RequestParam("id") int id) {
+    public String EditarEmployee(Model model,@RequestParam("id") int id) {
 
         Optional<Employees> optEmployee = employeeRepository.findById(id);
 
         if (optEmployee.isPresent()) {
             Employees employees = optEmployee.get();
-            model.addAttribute("Employee", employees);
+            model.addAttribute("employee", employees);
+            model.addAttribute("listaJobs", jobHistoryRepository.findAll());
             model.addAttribute("listaManagers",employeeRepository.findAllManagers());
             model.addAttribute("listaDepartamentos",departmentsRepository.findAll());
-            return "product/editFrm";
+            return "employee/edit";
         } else {
-            return "redirect:/product";
+            return "redirect:/employee/list";
         }
+
+
     }
+
+    @GetMapping("/borrar")
+    public String DeleteEmployee(Model model,@RequestParam("id") int id,
+                                      RedirectAttributes attr) {
+
+        Optional<Employees> optEmployee = employeeRepository.findById(id);
+
+        if (optEmployee.isPresent()) {
+            employeeRepository.deleteById(id);
+        }
+        return "redirect:/employee/list";
+
+    }
+
+    @GetMapping("/buscar")
+    public String buscarEmpleado(Model model, @RequestParam("search") String search) {
+        List<Employees> listaEmpleados = employeeRepository.buscarPorNombreApellidoPuestoDepartamentoCiudad(search);
+        model.addAttribute("listaEmpleados", listaEmpleados);
+        return "employee/list";
+    }
+
 }
 
 

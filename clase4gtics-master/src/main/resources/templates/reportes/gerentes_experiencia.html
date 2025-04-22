@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reporte de gerentes con experiencia</title>
+</head>
+<body>
+<h2>Reporte de gerentes con experiencia</h2>
+<a href="/" class="button">Regresar</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Departamento</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Sueldo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${gerentesExperiencia}">
+        <td th:text="${item.departamento}">Departamento</td>
+        <td th:text="${item.nombre}">Nombre</td>
+        <td th:text="${item.apellido}">Apellido</td>
+        <td th:text="${item.sueldo}">Sueldo</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -13,13 +13,13 @@
         <div class="mb-3">
             <a class="btn btn-primary" th:href="@{/employee/nuevo}">Nuevo Empleado</a>
         </div>
-        <form class="row mb-3 align-items-center" method="get" th:action="@{/empleado/buscar}">
+        <form class="row mb-3 align-items-center" method="get" th:action="@{/employee/buscar}">
             <div class="col-md-9">
                 <input class="form-control w-100" type="text" name="search" placeholder="Texto a buscar"/>
             </div>
             <div class="col-md-auto">
                 <button class="btn btn-outline-primary" type="submit">Buscar</button>
-                <a class="btn btn-outline-danger" th:href="@{/empleado/lista}">Limpiar</a>
+                <a class="btn btn-outline-danger" th:href="@{/empleado/list}">Limpiar</a>
             </div>
         </form>
 
@@ -44,9 +44,11 @@
                 <td th:text="${emp.department != null ? emp.department.departmentName : 'N/A'}"></td>
                 <td th:text="${emp.department != null && emp.department.location != null ? emp.department.location.city : 'N/A'}"></td>
                 <td>
-                    <a class="btn btn-primary btn-sm" th:href="@{'/empleado/editar/' + ${emp.employeeId}}">Editar</a>
-                    <a class="btn btn-danger btn-sm" th:href="@{'/empleado/borrar/' + ${emp.employeeId}}"
+                    <a class="btn btn-primary btn-sm" th:href="@{/employee/editar(id=${emp.employeeId})}">Editar</a>
+                    <a class="btn btn-danger btn-sm"
+                       th:href="@{/employee/borrar(id=${emp.employeeId})}"
                        onclick="return confirm('¿Está seguro de borrar este empleado?');">Borrar</a>
+
                 </td>
             </tr>
             </tbody>

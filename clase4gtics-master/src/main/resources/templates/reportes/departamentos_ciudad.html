@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reporte de departamento por país y ciudad</title>
+</head>
+<body>
+<h2>Reporte de departamento por país y ciudad</h2>
+<a href="/" class="button">Regresar</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>País</th>
+        <th>Ciudad</th>
+        <th>Cantidad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${reporteDepartamentos}">
+        <td th:text="${item.pais}">País</td>
+        <td th:text="${item.ciudad}">Ciudad</td>
+        <td th:text="${item.cantidad}">Cantidad</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
